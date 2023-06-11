@@ -1,0 +1,72 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    build: 
+      context: ./nginx
+      target: development
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - react-nextjs
+      - directus
+    networks:
+      - web-gateway
+
+  postgres:
+    image: postgres:15.3
+    container_name: postgres
+    restart: unless-stopped
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+      - /etc/timezone:/etc/timezone:ro
+    ports:
+      - 5433:5432
+    env_file:
+      - ./postgres/.env
+    networks:
+      - postgres
+
+  directus:
+    image: directus/directus:10.2.1
+    container_name: directus
+    restart: unless-stopped
+    ports:
+      - 8055:8055
+    user: "node"
+    volumes:
+      - ./directus/uploads:/directus/uploads
+      - ./directus/snapshots:/directus/snapshots
+      - ./directus/extensions:/directus/extensions
+    env_file:
+      - ./directus/.env
+    networks:
+      - postgres
+      - web-gateway
+    depends_on:
+      - postgres
+
+  react-nextjs:
+    container_name: react-nextjs
+    build:
+      context: ./react-nextjs
+      target: development
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ./react-nextjs:/usr/src/app/react-nextjs
+      - /usr/src/app/react-nextjs/node_modules/
+      - /usr/src/app/react-nextjs/build/
+    depends_on:
+      - directus
+    networks:
+      - web-gateway
+
+networks:
+  web-gateway:
+    driver: bridge
+  postgres:
+    driver: bridge
