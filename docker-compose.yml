@@ -4,7 +4,7 @@ services:
     container_name: nginx
     build: 
       context: ./nginx
-      target: development
+      target: ${ENV:-development}
     restart: unless-stopped
     ports:
       - 80:80
@@ -52,7 +52,7 @@ services:
     container_name: react-nextjs
     build:
       context: ./react-nextjs
-      target: development
+      target: ${ENV:-development}
     restart: unless-stopped
     ports:
       - 3000:3000
