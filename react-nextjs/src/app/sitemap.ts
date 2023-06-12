@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { getPosts } from "@/lib/api";
 
 export const dynamic = 'force-dynamic';
