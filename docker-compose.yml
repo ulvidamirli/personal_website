@@ -57,7 +57,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./react-nextjs:/usr/src/app/react-nextjs
+      - ./react-nextjs:/app/react-nextjs
     depends_on:
       - directus
     networks:
