@@ -1,4 +1,4 @@
-import "./globals.css";
+import "@/assets/css/globals.css";
 import Navbar from "@/components/Navbar";
 
 export default function RootLayout({ children, }: { children: React.ReactNode; }): JSX.Element {
