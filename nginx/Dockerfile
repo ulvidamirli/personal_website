@@ -25,7 +25,7 @@ RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
 RUN sed -i -r 's/(listen .*443)/\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g; s/(server \{)/\1\n    ssl off;/g' /etc/nginx/sites-available/ulvidamirli.com.conf /etc/nginx/sites-available/cms.ulvidamirli.com.conf
 
 # Reload your NGINX server
-RUN sudo nginx -t && sudo systemctl reload nginx
+RUN nginx -t && systemctl reload nginx
 
 # Obtain SSL certificates from Let's Encrypt using Certbot
 RUN certbot certonly --dry-run --webroot -d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com --email u.u.damirli@gmail.com -w /var/www/_letsencrypt -n --agree-tos --force-renewal
