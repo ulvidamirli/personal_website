@@ -16,7 +16,7 @@ COPY ./sites-available /etc/nginx/sites-available
 COPY ./sites-enabled /etc/nginx/sites-enabled
 COPY ./nginxconfig /etc/nginx/nginxconfig
 
-VOLUME [ "/var/log/nginx", "/etc/letsencrypt" ]
+VOLUME [ "/var/log/nginx", "/etc/letsencrypt", "/var/www/_letsencrypt" ]
 
 # Generate Diffie-Hellman keys
 RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
