@@ -1,6 +1,8 @@
 import "@/assets/css/globals.css";
 import Navbar from "@/components/Navbar";
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({ children, }: { children: React.ReactNode; }): JSX.Element {
   return (
     <html lang="en">
