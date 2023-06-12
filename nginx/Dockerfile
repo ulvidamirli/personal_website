@@ -25,7 +25,7 @@ RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
 RUN sed -i -r 's/(listen .*443)/\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g; s/(server \{)/\1\n    ssl off;/g' /etc/nginx/sites-available/ulvidamirli.com.conf /etc/nginx/sites-available/cms.ulvidamirli.com.conf
 
 # Reload your NGINX server
-RUN nginx -t && systemctl reload nginx
+# RUN sudo nginx -t && sudo systemctl reload nginx
 
 # Obtain SSL certificates from Let's Encrypt using Certbot
 RUN certbot certonly --dry-run --webroot -d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com --email u.u.damirli@gmail.com -w /var/www/_letsencrypt -n --agree-tos --force-renewal
@@ -34,14 +34,14 @@ RUN certbot certonly --dry-run --webroot -d ulvidamirli.com -d www.ulvidamirli.c
 RUN sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' /etc/nginx/sites-available/ulvidamirli.com.conf /etc/nginx/sites-available/cms.ulvidamirli.com.conf
 
 # Reload your NGINX server
-RUN sudo nginx -t && sudo systemctl reload nginx
+# RUN sudo nginx -t && sudo systemctl reload nginx
 
 # Configure Certbot to reload NGINX when it successfully renews certificates
-RUN echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh
-RUN sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh
+# RUN echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh
+# RUN sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh
 
 # Reload NGINX to load in your new configuration
-RUN sudo nginx -t && sudo systemctl reload nginx
+# RUN sudo nginx -t && sudo systemctl reload nginx
 
 
 
