@@ -11,7 +11,7 @@ FROM base as production
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 VOLUME "/app/react-nextjs/.next/"
-RUN npm ci --production
+RUN npm ci --omit=dev
 # RUN npm audit fix
 COPY . .
 RUN npm run build
