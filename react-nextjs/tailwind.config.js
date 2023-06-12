@@ -1,18 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 
-// const defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    // extend: {
-      // fontFamily: {
-        // display: [...defaultTheme.fontFamily.sans],
-        // sans: [...defaultTheme.fontFamily.sans],
-      // },
-    // },
+    extend: {
+      fontFamily: {
+        display: [...defaultTheme.fontFamily.sans],
+        sans: [...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
