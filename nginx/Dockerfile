@@ -16,7 +16,7 @@ COPY ./sites-available /etc/nginx/sites-available
 COPY ./sites-enabled /etc/nginx/sites-enabled
 COPY ./nginxconfig /etc/nginx/nginxconfig
 
-VOLUME [ "/var/log/nginx", "/etc/letsencrypt", "/var/www/_letsencrypt" ]
+VOLUME [ "/var/log/nginx", "/etc/letsencrypt", "/var/www/certbot" ]
 
 # Generate Diffie-Hellman keys
 RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
@@ -28,7 +28,7 @@ RUN sed -i -r 's/(listen .*443)/\1; #/g; s/(ssl_(certificate|certificate_key|tru
 # RUN sudo nginx -t && sudo systemctl reload nginx
 
 # Obtain SSL certificates from Let's Encrypt using Certbot
-RUN certbot certonly --dry-run --webroot -d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com --email u.u.damirli@gmail.com -n --agree-tos --force-renewal
+RUN certbot certonly --dry-run --webroot -d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com --email u.u.damirli@gmail.com -w /var/www/certbot -n --agree-tos --force-renewal
 
 # Uncomment SSL related directives in the configuration
 RUN sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' /etc/nginx/sites-available/ulvidamirli.com.conf /etc/nginx/sites-available/cms.ulvidamirli.com.conf

@@ -6,6 +6,8 @@ services:
       context: ./nginx
       target: ${ENV:-development}
     restart: unless-stopped
+    volumes:
+      - ./nginx/certbot:/var/www/certbot
     ports:
       - 80:80
       - 443:443
