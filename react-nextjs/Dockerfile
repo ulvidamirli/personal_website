@@ -12,7 +12,6 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 VOLUME "/app/react-nextjs/.next/"
 RUN npm ci --omit=dev
-# RUN npm audit fix
 COPY . .
 RUN npm run build
 COPY . .
@@ -21,6 +20,5 @@ CMD ["npm", "run", "start"]
 FROM base as development
 ENV NODE_ENV=development
 RUN npm install
-# RUN npm update
 COPY . .
 CMD ["npm", "run", "dev"]
