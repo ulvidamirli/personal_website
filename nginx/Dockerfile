@@ -1,4 +1,4 @@
-FROM nginx:1.24.0-alpine AS base
+FROM nginx:1.24.0 AS base
 EXPOSE 80
 
 FROM base AS production
