@@ -10,7 +10,7 @@ ENV NODE_ENV=production
 VOLUME "/usr/src/app/react-nextjs/.next/"
 RUN npm ci
 # RUN npm audit fix
-COPY . .
+# COPY . .
 RUN npm run build
 COPY . .
 CMD ["npm", "run", "start"]
