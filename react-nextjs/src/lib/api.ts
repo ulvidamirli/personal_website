@@ -10,6 +10,7 @@ export async function getPosts(limit: number, offset: number): Promise<PostListP
         headers: {
             Authorization: `Bearer ${process.env.API_TOKEN}`,
         },
+        cache: "no-store",
         next: { revalidate: 0 },
         },
     );
@@ -24,6 +25,7 @@ export async function getPost(id: string): Promise<PostProps> {
         headers: {
             Authorization: `Bearer ${process.env.API_TOKEN}`,
         },
+        cache: "no-store",
         next: { revalidate: 0 },
     });
     if (res.status === 404) notFound();
