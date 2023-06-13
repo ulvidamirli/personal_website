@@ -1,21 +1,11 @@
 version: '3'
 services:
   nginx:
+    image: nginx:1.24.0-alpine
     container_name: nginx
-    build: 
-      context: ./nginx
-      target: ${ENV:-development}
     restart: unless-stopped
-    volumes:
-      - ./nginx/certbot:/var/www/certbot
     ports:
       - 80:80
-      - 443:443
-    depends_on:
-      - react-nextjs
-      - directus
-    networks:
-      - web-gateway
 
   postgres:
     image: postgres:15.3-alpine
@@ -28,8 +18,6 @@ services:
       - 5433:5432
     env_file:
       - ./postgres/.env
-    networks:
-      - postgres
 
   directus:
     image: directus/directus:10.2.1
@@ -43,29 +31,12 @@ services:
       - ./directus/extensions:/directus/extensions
     env_file:
       - ./directus/.env
-    networks:
-      - postgres
-      - web-gateway
-    depends_on:
-      - postgres
 
   react-nextjs:
+    build: ./react-nextjs
     container_name: react-nextjs
-    build:
-      context: ./react-nextjs
-      target: ${ENV:-development}
     restart: unless-stopped
     ports:
       - 3000:3000
     volumes:
       - ./react-nextjs:/app/react-nextjs
-    depends_on:
-      - directus
-    networks:
-      - web-gateway
-
-networks:
-  web-gateway:
-    driver: bridge
-  postgres:
-    driver: bridge

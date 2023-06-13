@@ -1,0 +1,54 @@
+version: '3'
+services:
+  nginx:
+    extends:
+      file: docker-compose.common.yml
+      service: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-available:/etc/nginx/sites-available
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./nginx/nginxconfig:/etc/nginx/nginx/config
+      - ./certbot/www:/var/www/certbot:ro
+    ports:
+      - 443:443
+    depends_on:
+      - react-nextjs
+      - directus
+
+  certbot:
+    image: certbot/certbot:2.6.0
+    volumes:
+      - ./certbot/www:/var/www/certbot/:rw
+      - ./certbot/conf:/etc/letsencrypt/:rw
+    depends_on:
+      - nginx
+    networks:
+      - web-gateway
+
+  directus:
+    extends:
+      file: docker-compose.common.yml
+      service: directus
+    depends_on:
+      - postgres
+
+  postgres:
+    extends:
+      file: docker-compose.common.yml
+      service: postgres
+
+  react-nextjs:
+    extends:
+      file: docker-compose.common.yml
+      service: react-nextjs
+    build:
+      target: development
+    depends_on:
+      - directus
+
+networks:
+  web-gateway:
+    driver: bridge
+  postgres:
+    driver: bridge

@@ -1,4 +1,4 @@
-import "@/assets/css/globals.css";
+import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const dynamic = 'force-dynamic';
