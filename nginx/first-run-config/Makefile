@@ -23,7 +23,7 @@ test-certs:
     	-d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com'
 
 test-cert:
-	sudo docker-compose -f ../../docker-compose.prod.yml run --rm  \
+	sudo docker compose -f ../../docker-compose.prod.yml run --rm  \
 		certbot certonly \
 		--webroot \
 		--register-unsafely-without-email \
