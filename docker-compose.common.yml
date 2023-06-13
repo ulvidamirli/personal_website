@@ -30,6 +30,7 @@ services:
       - ./directus/snapshots:/directus/snapshots:rw
       - ./directus/extensions:/directus/extensions:rw
       - ./directus/extensions/interfaces:/directus/extensions/interfaces:rw
+      - ./directus/extensions/displays:/directus/extensions/displays:rw
     env_file:
       - ./directus/.env
 
