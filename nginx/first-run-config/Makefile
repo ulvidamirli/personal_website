@@ -22,6 +22,17 @@ test-certs:
 	sudo docker compose -f ../../docker-compose.prod.yml exec certbot -it sh -c 'certbot certonly --dry-run --webroot --webroot-path=/var/www/_letsencrypt -v --agree-tos --no-eff-email --register-unsafely-without-email --force-renewal \
     	-d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com'
 
+test-cert:
+	sudo docker-compose -f ../../docker-compose.prod.yml run --rm  \
+		certbot certonly \
+		--webroot \
+		--register-unsafely-without-email \
+		--agree-tos \
+		--webroot-path=/var/www/_letsencrypt/ \
+		--dry-run \
+		-v \
+		-d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com
+
 # Get SSL certificates inside the Docker container using Certbot
 get-certs:
 	docker exec -it my-nginx-container sh -c 'certbot certonly --standalone --agree-tos --no-eff-email \
