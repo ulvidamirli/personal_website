@@ -29,6 +29,7 @@ services:
       - ./directus/uploads:/directus/uploads
       - ./directus/snapshots:/directus/snapshots
       - ./directus/extensions:/directus/extensions
+      - ./directus/extensions/interfaces:/directus/extensions/interfaces
     env_file:
       - ./directus/.env
 
