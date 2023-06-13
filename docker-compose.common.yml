@@ -26,10 +26,10 @@ services:
     ports:
       - 8055:8055
     volumes:
-      - ./directus/uploads:/directus/uploads
-      - ./directus/snapshots:/directus/snapshots
-      - ./directus/extensions:/directus/extensions
-      - ./directus/extensions/interfaces:/directus/extensions/interfaces
+      - ./directus/uploads:/directus/uploads:rw
+      - ./directus/snapshots:/directus/snapshots:rw
+      - ./directus/extensions:/directus/extensions:rw
+      - ./directus/extensions/interfaces:/directus/extensions/interfaces:rw
     env_file:
       - ./directus/.env
 
