@@ -27,6 +27,9 @@ RUN sed -i -r 's/(listen .*443)/\1; #/g; s/(ssl_(certificate|certificate_key|tru
 # Reload your NGINX server
 # RUN sudo nginx -t && sudo systemctl reload nginx
 
+# Create the Certbot directory
+RUN mkdir -p /var/www/certbot
+
 # Obtain SSL certificates from Let's Encrypt using Certbot
 RUN certbot certonly --dry-run --webroot --webroot-path=/var/www/certbot/ -v -d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com --email u.u.damirli@gmail.com --agree-tos --force-renewal
 
