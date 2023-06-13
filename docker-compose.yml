@@ -37,7 +37,6 @@ services:
     restart: unless-stopped
     ports:
       - 8055:8055
-    user: "node"
     volumes:
       - ./directus/uploads:/directus/uploads
       - ./directus/snapshots:/directus/snapshots
