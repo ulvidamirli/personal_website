@@ -8,7 +8,7 @@ build-compose:
 	sudo docker compose -f docker-compose.prod.yml up -d
 
 dhparam:
-	openssl dhparam -out /etc/nginx/dhparam.pem 2048
+	openssl dhparam -out ../dhparam.pem 2048
 
 # Run the Docker container
 run:
