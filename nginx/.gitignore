@@ -1,2 +1,3 @@
 /certbot/
 /nginxconfig.txt
+/nginx/dhparam.pem
