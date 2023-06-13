@@ -9,7 +9,7 @@ run:
 	docker run -d --name my-nginx-container my-nginx-image
 
 comment-ssl:
-	sed -i -r 's/(listen .*443)/\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g; s/(server \{)/\1\n    ssl off;/g' /etc/nginx/sites-available/ulvidamirli.com.conf /etc/nginx/sites-available/cms.ulvidamirli.com.conf
+	sed -i -r 's/(listen .*443)/\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g; s/(server \{)/\1\n    ssl off;/g' ../sites-available/ulvidamirli.com.conf ../sites-available/cms.ulvidamirli.com.conf
 
 # Test obtaining SSL certificates from Let's Encrypt using Certbot
 test-certs:
@@ -23,7 +23,7 @@ get-certs:
 	-d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com'
 
 uncomment-ssl:
-	sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' /etc/nginx/sites-available/ulvidamirli.com.conf /etc/nginx/sites-available/cms.ulvidamirli.com.conf
+	sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' ../sites-available/ulvidamirli.com.conf ../sites-available/cms.ulvidamirli.com.conf
 
 restart:
 	docker restart my-nginx-container
