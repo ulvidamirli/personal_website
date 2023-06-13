@@ -1,4 +1,4 @@
-.PHONY: build run test-certs get-certs comment-ssl uncomment-ssl restart
+.PHONY: get-dhparam comment-ssl build-compose test-certs get-certs uncomment-ssl restart-compose
 
 get-dhparam:
 	openssl dhparam -out ../dhparam.pem 2048
@@ -37,3 +37,6 @@ get-certs:
 
 uncomment-ssl:
 	sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' ./sites-available/ulvidamirli.com.conf ./sites-available/cms.ulvidamirli.com.conf
+
+restart-compose:
+	sudo docker compose -f ../docker-compose.prod.yml restart
