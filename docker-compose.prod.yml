@@ -5,12 +5,14 @@ services:
       file: docker-compose.common.yml
       service: nginx
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/sites-available:/etc/nginx/sites-available
-      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
-      - ./nginx/nginxconfig:/etc/nginx/nginxconfig
-      - ./certbot/www:/var/www/certbot:ro
+      # - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      # - ./nginx/sites-available:/etc/nginx/sites-available
+      # - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      # - ./nginx/nginxconfig:/etc/nginx/nginxconfig
+      # - ./nginx/dhparam.pem:/etc/nginx/dhparam.pem
+      - ./certbot/_letsencrypt:/var/www/_letsencrypt:ro
       - ./certbot/conf:/etc/letsencrypt/:ro
+      - ./nginx/development.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 443:443
     depends_on:
@@ -19,8 +21,9 @@ services:
 
   certbot:
     image: certbot/certbot:v2.6.0
+    container_name: certbot
     volumes:
-      - ./certbot/www:/var/www/certbot/:rw
+      - ./certbot/_letsencrypt:/var/www/_letsencrypt:rw
       - ./certbot/conf:/etc/letsencrypt/:rw
     depends_on:
       - nginx
