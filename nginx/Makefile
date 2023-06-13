@@ -36,7 +36,7 @@ get-certs:
 		-d ulvidamirli.com -d www.ulvidamirli.com -d cms.ulvidamirli.com
 
 uncomment-ssl:
-	sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' ./sites-available/ulvidamirli.com.conf ./sites-available/cms.ulvidamirli.com.conf
+	sed -i -r -z 's/#?; ?#//g; s/(server \{)\n    ssl off;/\1/g' ./sites-available/*
 
 restart-compose:
 	sudo docker compose -f ../docker-compose.prod.yml restart
