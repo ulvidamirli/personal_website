@@ -10,6 +10,7 @@ services:
       - ./nginx/sites-enabled:/etc/nginx/sites-enabled
       - ./nginx/nginxconfig:/etc/nginx/nginxconfig
       - ./certbot/www:/var/www/certbot:ro
+      - ./certbot/conf:/etc/letsencrypt/:ro
     ports:
       - 443:443
     depends_on:
