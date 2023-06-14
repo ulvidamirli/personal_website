@@ -10,7 +10,7 @@ export default function PostCard({
   excerpt,
 }: PostCardProps): JSX.Element {
   return (
-    <article>
+    <article className="mb-10">
       <Link href={href} className="block group">
         <div className="space-x-4">
           <span className="p-xsmall">{date}</span>
