@@ -11,7 +11,7 @@ start-compose:
 
 # Test obtaining SSL certificates from Let's Encrypt using Certbot
 test-certs:
-	sudo docker compose -f ../../docker-compose.prod.yml run --rm  \
+	sudo docker compose -f ../docker-compose.prod.yml run --rm  \
 		certbot certonly \
 		--dry-run \
 		--agree-tos \
@@ -24,7 +24,7 @@ test-certs:
 
 # Get SSL certificates inside the Docker container using Certbot
 get-certs:
-	sudo docker compose -f ../../docker-compose.prod.yml run --rm  \
+	sudo docker compose -f ../docker-compose.prod.yml run --rm  \
 		certbot certonly \
 		--agree-tos \
 		--no-eff-email \
