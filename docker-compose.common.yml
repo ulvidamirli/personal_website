@@ -23,6 +23,7 @@ services:
     image: directus/directus:10.2.1
     container_name: directus
     restart: unless-stopped
+    user: node
     ports:
       - 8055:8055
     volumes:
