@@ -1,7 +1,7 @@
 .PHONY: get-dhparam comment-ssl build-compose test-certs get-certs uncomment-ssl restart-compose
 
 get-dhparam:
-	openssl dhparam -out ../dhparam.pem 2048
+	openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
 comment-ssl:
 	sed -i -r 's/(listen .*443)/\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g; s/(server \{)/\1\n    ssl off;/g' ./sites-available/*
