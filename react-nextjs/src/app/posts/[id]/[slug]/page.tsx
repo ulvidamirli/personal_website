@@ -28,7 +28,7 @@ export default async function Page({ params: { id, slug },}: { params: { id: str
       <main className="w-full px-4">
         <Tag text={post.tag} />
         <h1 className="mb-10">{post.name}</h1>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} className="prose max-w-none"></div>
+        <div dangerouslySetInnerHTML={{ __html: post.content }} className="prose max-w-none mb-10"></div>
       </main>
     </>
   );
